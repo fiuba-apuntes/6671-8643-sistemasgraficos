@@ -1,0 +1,144 @@
+\documentclass[a4paper, twoside]{article}
+\usepackage[utf8]{inputenc} % Especifica la codificación de caracteres de los documentos.
+\usepackage[spanish]{babel} % Indica que el documento se escribirá en español.
+\usepackage[top=3cm, bottom=2.5cm, inner=1.5cm, outer=2.5cm]{geometry} % Márgenes personalizados
+\usepackage{subfiles} % Paquete para incluir el preambulo en los sub archivos.
+\usepackage{afterpage} % Permite añadir páginas despues de una página dada.
+\usepackage{hyperref} % Permite incluir enlaces en los archivos.
+\usepackage{lastpage} % Paquete para poder contabilizar el total de páginas del documento.
+\usepackage{fancyhdr} % Permite personalizar los header y footer del documento.
+\usepackage{graphicx} % Permite incluir gráficos
+\usepackage[hang, bf]{caption} % Personaliza los subtítulos de las figuras y tablas
+\usepackage{float} % Permite posicionar mejor las figuras y tablas
+\usepackage{amsmath} % Comandos para la escritura de fórmulas matemáticas de mayor complejidad
+\usepackage{amsfonts} % Proporciona fuentes matemáticas
+\usepackage{amssymb} % Proporciona símbolos matemáticos de la American Mathematical Society
+
+% Defino la ruta de los paquetes personalizados para el apunte
+\newcommand{\rutapaquetes}{./paquetes-apunte}
+
+\usepackage[mostrarlicencia]{\rutapaquetes/caratula} % Caratula personalizada (cargada desde caratula.sty)
+\usepackage{\rutapaquetes/macros} % Macros útiles para los apuntes (cargado desde macros.sty)
+\usepackage[ocultarrevisores]{\rutapaquetes/colaboradores} % Seccion de colaboradores (cargada y creada con colaboradores.sty)
+\usepackage{\rutapaquetes/historial} % Seccion de historial de cambios (cargada y creada con historial.sty)
+
+% Define los estilos de los enlaces interpretados por el paquete hyperref
+\hypersetup{
+    colorlinks=true,   % false: boxed links; true: colored links
+    linkcolor=black,   % color of internal links (change box color with linkbordercolor)
+    citecolor=green,   % color of links to bibliography
+    filecolor=magenta, % color of file links
+    urlcolor=blue,     % color of external links
+}
+
+% Define los directorios de las imágenes y gráficos
+\graphicspath{ {./} {\rutapaquetes/} }
+
+\newcommand{\nombremateria}{Sistemas Gráficos (66.71 - 86.43)} % Defino el comando "\nombremateria" para no harcodear el nombre en varios lugares.
+
+% Define el pagestyle personalizado
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{}{\thesection\ \ #1}}
+% Define header para pagina par
+\fancyhead[ER]{\rightmark}
+% Define header para pagina impar
+\fancyhead[OL]{\rightmark}
+% Define footer para pagina par
+\fancyfoot[EL]{\nombremateria} % Nombre del apunte a la izquierda
+\fancyfoot[ER]{Página \thepage\ de \pageref{LastPage}} % Numero de pagina a la derecha
+% Define footer para pagina impar
+\fancyfoot[OL]{Página \thepage\ de \pageref{LastPage}} % Numero de pagina a la izquierda
+\fancyfoot[OR]{\nombremateria} % Nombre del apunte a la derecha
+
+\renewcommand{\footrulewidth}{0.4pt} % Agrego linea que separa el footer
+
+% Configura la caratula
+\materia{\nombremateria}
+\tipoapunte{Teórico}
+%\tema{Tema de la Materia}
+%\subtema{Subtema}
+
+\cuadro{teorema}{blue}
+\cuadro{corolario}{green}
+
+\begin{document}
+% Página en blanco agregada después de la carátula
+%\afterpage{
+%	\null
+%	\thispagestyle{empty}%
+%	\addtocounter{page}{-1}%
+%	\newpage}
+\maketitle % Genera la carátula
+
+\tableofcontents % Genera el índice
+
+\subfile{\rutapaquetes/acerca-del-proyecto.tex} % Inlcuye informacion acerca del proyecto FIUBA Apuntes
+
+% Insertar aquí el contenido del apunte. A continuacion hay secciones a modo de ejemplo.
+
+\section{Sección primera}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan eros erat, bibendum porttitor elit gravida et. Phasellus vulputate scelerisque eros ut ultrices. Ut suscipit, justo ac viverra commodo, turpis massa lacinia nisl, ac commodo arcu sapien ut quam. Vestibulum sodales, erat nec molestie sagittis, orci eros posuere velit, ut sagittis purus nunc nec elit. Quisque in dolor eget quam tempor consectetur. Nam laoreet, enim venenatis facilisis pulvinar, leo tortor posuere tellus, pellentesque elementum metus risus a ex. Quisque semper id elit eu luctus. Duis commodo tincidunt vehicula. Praesent varius vel sapien semper facilisis. Integer sollicitudin urna lorem, mattis sagittis mauris varius vitae. Aenean cursus auctor ligula, in porta felis porttitor mattis. Sed et porta tellus. Donec et turpis vel erat interdum malesuada at ac elit. Aenean sed lorem venenatis, laoreet nibh vitae, sagittis massa. Etiam vel iaculis ex. Maecenas tincidunt erat eu odio tempus facilisis.
+
+\begin{figure}[H] % Opción H coloca la figura en la posición en que se encuentra el código
+	\centering % Centra la imagen horizontalmente
+	\includegraphics[width=0.7\textwidth]{fiuba_apuntes} % Especifica el archivo y tamaño
+	\caption{Logo de FIUBA Apuntes} % Agrega subtitulo a la imagen
+	\label{fig:fiuba_apuntes} % Etiqueta para poder referenciar la figura
+\end{figure}
+
+In a condimentum massa, in volutpat purus. Phasellus pellentesque purus faucibus nibh tincidunt, commodo tincidunt dolor semper. Phasellus eget tincidunt elit. Aenean eu quam diam. Donec vel leo nisl. Mauris quis aliquam nulla. Proin ornare malesuada enim, sed maximus ligula congue a. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras dapibus lorem eu orci dignissim sollicitudin. 
+
+\subsection{Subsección primera}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus accumsan enim ante. In hac habitasse platea dictumst. Nulla ac est ac nisl tristique pulvinar. Mauris vehicula lorem vel diam mollis, vitae mattis libero dignissim. Cras sit amet justo rutrum leo mollis efficitur vitae non sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec ac enim id massa tincidunt sollicitudin. Donec scelerisque lacinia venenatis. Mauris in mauris orci. Duis mattis metus nec lorem rhoncus sollicitudin. Vestibulum vitae nisi vel mi feugiat malesuada a ac tortor. % \\ Agrega un salto de línea
+
+\begin{corolario*}{Titulo del corolario} % El * es para que no enumere el cuadro de corolario (no implementado aún)
+	Suspendisse potenti. In at mauris in dolor interdum sodales. Nulla eget eros ipsum. Mauris aliquet turpis eu mollis elementum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec dui risus, tristique id ipsum eu, consequat suscipit turpis. Donec sagittis aliquet neque ut malesuada. Mauris nec molestie tellus. Fusce quis scelerisque quam.
+	
+	\begin{equation*} % El * es para que no enumere la ecuación
+		a^2 + b^2 = c^2
+	\end{equation*}
+\end{corolario*}
+
+Vivamus congue interdum tortor. Duis facilisis sapien quis dui venenatis euismod. Mauris tristique, metus id imperdiet sodales, risus ex porta dolor, eget egestas arcu eros sed dolor. Aliquam erat volutpat. Sed eu justo justo. Quisque iaculis vestibulum urna sed fringilla. Nullam mattis vulputate tortor, at dictum metus finibus in. In luctus elit nec sem luctus imperdiet.
+
+Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris tempor ipsum in dui pretium, eget sollicitudin est sagittis. Nullam viverra vulputate lorem, eu porttitor augue dictum rhoncus. Nullam risus nibh, rutrum at enim eu, rutrum malesuada metus. Sed pretium, orci non consectetur vulputate, orci magna pellentesque sem, ac aliquet sapien neque quis diam. Phasellus et dolor a nunc dapibus blandit. Suspendisse sit amet aliquet nibh, molestie mattis sapien. Cras sit amet sagittis ex. Donec nec sapien mollis, hendrerit neque sed, imperdiet augue. Sed dignissim eu eros nec aliquet. Ut convallis rutrum nunc at lacinia. 
+
+\subsection{Subsección segunda}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie auctor hendrerit. Maecenas fermentum tortor sed condimentum rutrum. Integer tincidunt porta velit nec blandit. Morbi et gravida quam, ac volutpat tellus. Aliquam justo mauris, dignissim at interdum nec, sollicitudin et tortor. Ut finibus egestas ante, eu feugiat risus imperdiet at. Curabitur in est neque. Praesent rutrum malesuada auctor. Cras ac enim tincidunt, venenatis felis vel, condimentum ipsum. Phasellus porttitor vehicula mi a pretium.\\ % \\ Agrega un salto de línea
+
+\begin{teorema*}{Titulo del teorema} % El * es para que no enumere el cuadro de teorema (no implementado aún)
+	Sed a felis consequat, imperdiet velit id, euismod tellus. Nullam a dui ultricies, posuere libero at, tristique tortor. Donec tortor tortor, efficitur et dolor elementum, facilisis dignissim mi. Maecenas massa ante, pharetra sed venenatis id, sollicitudin mattis tortor. Cras auctor gravida euismod. Donec elementum mi tortor, non mollis sapien mattis eget. Nullam ut pulvinar felis. Sed sed molestie tortor. Sed nec cursus sem, ac efficitur nisi.
+	
+	\begin{equation}
+		\iint_{\partial W} \overline{\textbf{F}} \cdot d \overline{\textbf{s}} = \iiint_{W} div (\overline{\textbf{F}}) \: dxdydz
+	\end{equation}
+\end{teorema*}
+
+Maecenas blandit, neque nec venenatis elementum, tellus tortor volutpat mauris, sit amet scelerisque risus mauris eu elit. Suspendisse id dignissim tortor. Curabitur euismod finibus mollis. Aliquam mattis nunc sed diam sodales tincidunt. Fusce volutpat magna sit amet nulla imperdiet aliquet. Etiam dignissim justo magna, non porttitor urna tincidunt lobortis. Sed volutpat ligula ac odio facilisis porta. Donec ut lectus condimentum, molestie mauris in, scelerisque arcu. Donec leo ipsum, eleifend et erat vitae, tristique tincidunt leo. Suspendisse id orci et elit blandit fringilla. Pellentesque interdum sapien et risus sagittis, vehicula convallis leo pulvinar. Etiam sagittis a sem sed pretium. Etiam in aliquam elit. Vestibulum tempus sit amet turpis vel faucibus. Donec feugiat imperdiet libero vitae pretium. 
+
+% Bibliografía utilizada en el apunte
+\newpage
+\newcommand{\bibliographyname}{Bibliografía} % Defino el nombre de la sección de la bibliografía
+\addcontentsline{toc}{section}{\bibliographyname} % Agrego la bibliografía en el índice
+\renewcommand\refname{\bibliographyname} % Renombro a la bibliografía (por default es 'Referencias')
+\begin{thebibliography}{X}
+	\bibitem{Hea} \textsc{Donald Hearn} y \textsc{M. Pauline Baker}, \textit{Gráficos por computadora en OpenGL}, Tercera edición, Pearson.
+	\bibitem{Dan} \textsc{David Wolff}, \textit{OpenGL 4.0 Shading Language Cookbook}.
+\end{thebibliography}
+
+% Incluir los nombres de las personas que han colaborado en la creación del apunte
+\colaborador{Ezequiel Pérez Dittler}
+%\colaborador{Colaborador 2}
+%\revisor{Dr. Profesor}{10/01/2015}
+\makeseccioncolaboradores % Crea la seccion de colaboradres
+
+% Incluir el historial de cambios
+\revision{25/08/2015}{Versión inicial.}
+%\revision{10/01/2015}{Se agregó una carátula personalizada, una sección con información del proyecto FIUBA Apuntes, la sección de colaboradores del apunte, sección de historial de cambios, ejemplo de bibliografía, ajuste de márgenes, encabezado y pie de página.}
+\makehistorial
+
+\end{document}
