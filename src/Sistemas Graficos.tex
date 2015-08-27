@@ -76,55 +76,113 @@
 
 \subfile{\rutapaquetes/acerca-del-proyecto.tex} % Inlcuye informacion acerca del proyecto FIUBA Apuntes
 
-\section{3D}
+\section{Espacio tridimencional (3D)}
 
-\begin{definicion}{Sistema de coordenadas}
+\begin{definicion*}{Sistema de coordenadas}
 	Muchas plataformas gráficas usan diferentes sistemas de coordenadas. En la materia se utilizarán los sistemas de coordenadas de terna derecha.
-\end{definicion}
+\end{definicion*}
 
-\subsection{Manipulación de vértices}
+\subsection{Transformación geométrica en un espacio tridimencional}
 
-\begin{definicion}{Orden de operaciones}
-	Para una correcta manipulación de los vértices, se recomienda el siguiente ordeN de operaciones.
+\begin{definicion*}{Orden de las transformaciones}
+	Para una correcta manipulación de los vértices, se recomienda el siguiente orden de operaciones.
 	\[
 		ESCALADO \Rightarrow ROTACION \Rightarrow TRASLACION
 	\]
-\end{definicion}
+\end{definicion*}
+
+\subsubsection{Traslación}
+\begin{definicion*}{Traslación}
+	Una posición $P = (x, y, z)$ en un espacio tridimensional, se traslada a la posición $P' = (x', y', z')$ añadiendo las distancias de traslación $t_x$, $t_y$ y $t_z$ a las coordenadas cartesianas de $P$
+
+	\begin{align*}
+		x' = x + t_x \\
+		y' = y + t_y \\
+		z' = z + t_z
+	\end{align*}
+\end{definicion*}
 
 \subsubsection{Escalado}
-\begin{minipage}{0.3\textwidth}
-    \begin{center}
-		\begin{definicion}{Operación de escalado}
-			\begin{align*}
-				x' = e_x \cdot x \\
-				y' = e_y \cdot y \\
-				z' = e_z \cdot z \\
-			\end{align*}
-		\end{definicion}
-    \end{center}
-\end{minipage}
-\begin{minipage}{0.6\textwidth}
-    \begin{center}
-		\begin{definicion}{Tipos de escalado}
-			\begin{description}
-				\item[Isotrópico] Cuando se cumple $ e_x = e_y = e_z $.
-				\item[Anisotrópico] Cuando no se cumple la igualdad del isotrópico.
-			\end{description}
-		\end{definicion}
-    \end{center}
-\end{minipage}
+\begin{definicion*}{Escalado}
+	Una posición $P = (x, y, z)$ en un espacio tridimensional, se cambia de escala con los parámetros $e_x$, $e_y$ y $e_z$ resultando en la posición $P' = (x', y', z')$
 
-\begin{definicion}{Proyección}
-	Es un tipo particular de escalado donde 2 de sus índices tienen valor 1 y uno de ellos tiene valor 0.
+	\begin{align*}
+		x' = e_x \cdot x \\
+		y' = e_y \cdot y \\
+		z' = e_z \cdot z
+	\end{align*}
 
-	Como resultado, se obtendrá la proyección de los vértices en el plano correspondiente a los índices cuyo valor es 1.
-\end{definicion}
+	Cambiar la escala de un objeto cambia la posición del mismo respecto del origen de coordenadas. Un valor del parámetro superior a 1 mueve un punto alejándolo del origen en la correspondiente dirección de coordenadas.
+De la misma manera, un valor de parámetro inferior a 1 mueve un punto acercándolo al origen en esa dirección de coordenadas.
+\end{definicion*}
 
-\begin{definicion}{Escalado inverso}
-	Permite regresar al tamaño original.
+\begin{definicion*}{Tipos de escalado}
+	\begin{description}
+		\item[Isotrópico] Cuando se cumple $ e_x = e_y = e_z $.
+		\item[Anisotrópico] Cuando no se cumple la igualdad del isotrópico.
+	\end{description}
 
-	No es válido para proyecciones, ya que se eliminó la información correspondiente a uno de los ejes.
-\end{definicion}
+	En un cambio de escala isotrópico, las dimensiones relativas del objeto transformado se mantienen.\\
+	En un cambio de escala anisotrópico, las dimensiones relativas del objeto transformado cambian.
+\end{definicion*}
+
+\begin{definicion*}{Proyección}
+	Es un tipo particular de escalado donde 2 de sus parámetros tienen valor 1 y uno de ellos tiene valor 0.
+
+	Como resultado, se obtendrá la proyección del objeto en el plano correspondiente a los parámetros cuyo valor es 1.
+\end{definicion*}
+
+\begin{definicion*}{Escalado inverso}
+	Permite regresar a la dimensión relativa original del objeto.
+
+	No se puede aplicar el escalado inverso a proyecciones, ya que se perdió información correspondiente a uno de los ejes.
+\end{definicion*}
+
+\subsubsection{Rotación}
+
+\begin{definicion*}{Rotación respecto al eje $z$}
+	Rotación de un ángulo $\theta$ alrededor del eje $z$.
+
+	\begin{align*}
+		x' &= \cos(\theta) \cdot x - \sin(\theta) \cdot y \\
+		y' &= \sin(\theta) \cdot x + \cos(\theta) \cdot y \\
+		z' &= z
+	\end{align*}
+\end{definicion*}
+
+\begin{definicion*}{Rotación respecto al eje $x$}
+	Rotación de un ángulo $\theta$ alrededor del eje $x$.
+
+	\begin{align*}
+		x' &= x \\
+		y' &= \cos(\theta) \cdot y - \sin(\theta) \cdot z \\
+		z' &= \sin(\theta) \cdot y + \cos(\theta) \cdot z
+	\end{align*}
+\end{definicion*}
+
+\begin{definicion*}{Rotación respecto al eje $y$}
+	Rotación de un ángulo $\theta$ alrededor del eje $y$.
+
+	\begin{align*}
+		x' &= \sin(\theta) \cdot z + \cos(\theta) \cdot x \\
+		y' &= y \\
+		z' &= \cos(\theta) \cdot z - \sin(\theta) \cdot x
+	\end{align*}
+\end{definicion*}
+
+\subsubsection{Transformación afín}
+
+\begin{definicion*}{Transformación afín}
+	Las transformaciones afines son combinaciones lineales de $x$, $y$ y $z$
+
+	\begin{align*}
+		x' &= a \cdot x + b \cdot y + c \cdot x + d \\
+		y' &= e \cdot x + f \cdot y + g \cdot x + h \\
+		z' &= i \cdot x + j \cdot y + k \cdot x + l
+	\end{align*}
+
+	La traslación, el escalado y la rotación en 3D son transformaciones afines.
+\end{definicion*}
 
 \section{Sección de ejemplo}
 
