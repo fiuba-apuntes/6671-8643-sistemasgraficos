@@ -132,12 +132,6 @@ De la misma manera, un valor de parámetro inferior a 1 mueve un punto acercánd
 	Como resultado, se obtendrá la proyección del objeto en el plano correspondiente a los parámetros cuyo valor es 1.
 \end{definicion*}
 
-\begin{definicion*}{Escalado inverso}
-	Permite regresar a la dimensión relativa original del objeto.
-
-	No se puede aplicar el escalado inverso a proyecciones, ya que se perdió información correspondiente a uno de los ejes.
-\end{definicion*}
-
 \subsubsection{Rotación}
 
 \begin{definicion*}{Rotación respecto al eje $z$}
@@ -184,6 +178,163 @@ De la misma manera, un valor de parámetro inferior a 1 mueve un punto acercánd
 	La traslación, el escalado y la rotación en 3D son transformaciones afines.
 \end{definicion*}
 
+\begin{definicion*}{Transformación inversa}
+	Todas las transformaciones tienen inversa.
+	Salvo que se haya realizado una proyeccione, ya que se pierde información.
+\end{definicion*}
+
+\subsection{Representación matricial del espacio tridimencional (H4)}
+
+\subsubsection{Transformación afín}
+\begin{definicion*}{Representación matricial de la transformación afín}
+	\begin{align*}
+		P' &= T \cdot P \\
+		\begin{bmatrix}
+			x' \\
+			y' \\
+			z' \\
+			1
+		\end{bmatrix} &=
+		\begin{bmatrix}
+			a & b & c & d \\
+			e & f & g & h \\
+			i & j & k & l \\
+			0 & 0 & 0 & 1
+		\end{bmatrix}
+		\begin{bmatrix}
+			x \\
+			y \\
+			z \\
+			1
+		\end{bmatrix}
+	\end{align*}
+\end{definicion*}
+
+\subsubsection{Traslación}
+\begin{definicion*}{Representación matricial de la traslación}
+	\begin{align*}
+		\begin{bmatrix}
+			x + t_x \\
+			y + t_y \\
+			z + t_z \\
+			1
+		\end{bmatrix} &=
+		\begin{bmatrix}
+			1 & 0 & 0 & t_x \\
+			0 & 1 & 0 & t_y \\
+			0 & 0 & 1 & t_z \\
+			0 & 0 & 0 & 1
+		\end{bmatrix}
+		\begin{bmatrix}
+			x \\
+			y \\
+			z \\
+			1
+		\end{bmatrix}
+	\end{align*}
+\end{definicion*}
+
+\subsubsection{Escalado}
+\begin{definicion*}{Representación matricial del escalado}
+	\begin{align*}
+		\begin{bmatrix}
+			e_x \cdot x \\
+			e_y \cdot y \\
+			e_z \cdot z \\
+			1
+		\end{bmatrix} &=
+		\begin{bmatrix}
+			e_x & 0   & 0   & 0 \\
+			0   & e_y & 0   & 0 \\
+			0   & 0   & e_z & 0 \\
+			0   & 0   & 0   & 1
+		\end{bmatrix}
+		\begin{bmatrix}
+			x \\
+			y \\
+			z \\
+			1
+		\end{bmatrix}
+	\end{align*}
+\end{definicion*}
+
+\subsubsection{Rotación}
+\begin{definicion*}{Representación matricial de la rotación respecto al eje $z$}
+	Rotación de un ángulo $\theta$ alrededor del eje $z$.
+
+	\begin{align*}
+		\begin{bmatrix}
+			\cos(\theta) \cdot x - \sin(\theta) \cdot y \\
+			\sin(\theta) \cdot x + \cos(\theta) \cdot y \\
+			z \\
+			1
+		\end{bmatrix} &=
+		\begin{bmatrix}
+			\cos(\theta) & -\sin(\theta) & 0 & 0 \\
+			\sin(\theta) & \cos(\theta)  & 0 & 0 \\
+			0            & 0             & 1 & 0 \\
+			0            & 0             & 0 & 1
+		\end{bmatrix}
+		\begin{bmatrix}
+			x \\
+			y \\
+			z \\
+			1
+		\end{bmatrix}
+	\end{align*}
+\end{definicion*}
+
+\begin{definicion*}{Representación matricial de la rotación respecto al eje $x$}
+	Rotación de un ángulo $\theta$ alrededor del eje $x$.
+
+	\begin{align*}
+		\begin{bmatrix}
+			x \\
+			\cos(\theta) \cdot y - \sin(\theta) \cdot z \\
+			\sin(\theta) \cdot y + \cos(\theta) \cdot z \\
+			1
+		\end{bmatrix} &=
+		\begin{bmatrix}
+			1 & 0            & 1             & 0 \\
+			0 & \cos(\theta) & -\sin(\theta) & 0 \\
+			0 & \sin(\theta) & \cos(\theta)  & 0 \\
+			0 & 0            & 0             & 1
+		\end{bmatrix}
+		\begin{bmatrix}
+			x \\
+			y \\
+			z \\
+			1
+		\end{bmatrix}
+	\end{align*}
+\end{definicion*}
+
+\begin{definicion*}{Representación matricial de la rotación respecto al eje $y$}
+	Rotación de un ángulo $\theta$ alrededor del eje $y$.
+
+	\begin{align*}
+		\begin{bmatrix}
+			\cos(\theta) \cdot x + \sin(\theta) \cdot z \\
+			y \\
+			- \sin(\theta) \cdot x + \cos(\theta) \cdot z \\
+			1
+		\end{bmatrix} &=
+		\begin{bmatrix}
+			\cos(\theta)  & 0 & \sin(\theta) & 0 \\
+			0             & 1 & 1            & 0 \\
+			-\sin(\theta) & 0 & \cos(\theta) & 0 \\
+			0             & 0 & 0            & 1
+		\end{bmatrix}
+		\begin{bmatrix}
+			x \\
+			y \\
+			z \\
+			1
+		\end{bmatrix}
+	\end{align*}
+\end{definicion*}
+
+\newpage
 \section{Sección de ejemplo}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan eros erat, bibendum porttitor elit gravida et. Phasellus vulputate scelerisque eros ut ultrices. Ut suscipit, justo ac viverra commodo, turpis massa lacinia nisl, ac commodo arcu sapien ut quam. Vestibulum sodales, erat nec molestie sagittis, orci eros posuere velit, ut sagittis purus nunc nec elit. Quisque in dolor eget quam tempor consectetur. Nam laoreet, enim venenatis facilisis pulvinar, leo tortor posuere tellus, pellentesque elementum metus risus a ex. Quisque semper id elit eu luctus. Duis commodo tincidunt vehicula. Praesent varius vel sapien semper facilisis. Integer sollicitudin urna lorem, mattis sagittis mauris varius vitae. Aenean cursus auctor ligula, in porta felis porttitor mattis. Sed et porta tellus. Donec et turpis vel erat interdum malesuada at ac elit. Aenean sed lorem venenatis, laoreet nibh vitae, sagittis massa. Etiam vel iaculis ex. Maecenas tincidunt erat eu odio tempus facilisis.
@@ -196,19 +347,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan eros erat,
 \end{figure}
 
 In a condimentum massa, in volutpat purus. Phasellus pellentesque purus faucibus nibh tincidunt, commodo tincidunt dolor semper. Phasellus eget tincidunt elit. Aenean eu quam diam. Donec vel leo nisl. Mauris quis aliquam nulla. Proin ornare malesuada enim, sed maximus ligula congue a. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras dapibus lorem eu orci dignissim sollicitudin.
-
-\begin{corolario*}{Titulo del corolario} % El * es para que no enumere el cuadro de corolario (no implementado aún)
-	Suspendisse potenti. In at mauris in dolor interdum sodales. Nulla eget eros ipsum. Mauris aliquet turpis eu mollis elementum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec dui risus, tristique id ipsum eu, consequat suscipit turpis. Donec sagittis aliquet neque ut malesuada. Mauris nec molestie tellus. Fusce quis scelerisque quam.
-	
-	\begin{equation*} % El * es para que no enumere la ecuación
-		a^2 + b^2 = c^2
-	\end{equation*}
-\end{corolario*}
-
-Vivamus congue interdum tortor. Duis facilisis sapien quis dui venenatis euismod. Mauris tristique, metus id imperdiet sodales, risus ex porta dolor, eget egestas arcu eros sed dolor. Aliquam erat volutpat. Sed eu justo justo. Quisque iaculis vestibulum urna sed fringilla. Nullam mattis vulputate tortor, at dictum metus finibus in. In luctus elit nec sem luctus imperdiet.
-
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris tempor ipsum in dui pretium, eget sollicitudin est sagittis. Nullam viverra vulputate lorem, eu porttitor augue dictum rhoncus. Nullam risus nibh, rutrum at enim eu, rutrum malesuada metus. Sed pretium, orci non consectetur vulputate, orci magna pellentesque sem, ac aliquet sapien neque quis diam. Phasellus et dolor a nunc dapibus blandit. Suspendisse sit amet aliquet nibh, molestie mattis sapien. Cras sit amet sagittis ex. Donec nec sapien mollis, hendrerit neque sed, imperdiet augue. Sed dignissim eu eros nec aliquet. Ut convallis rutrum nunc at lacinia. 
-
 
 % Bibliografía utilizada en el apunte
 \newpage
